@@ -96,6 +96,12 @@
         font-weight: bold;
     }
 
+    span.text-school-item,
+    span.text-course-item,
+    span.text-number-users {
+        color: var(--color-text-disabled);
+    }
+
     div.colors {
         display: flex;
         justify-content: space-around;

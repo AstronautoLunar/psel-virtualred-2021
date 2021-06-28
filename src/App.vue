@@ -40,11 +40,27 @@
           </div>
         </template>
       </DiplomasSideMenu>
-      <keep-alive>
-        <component :is="currentComponent">
+      <div id="area-current-component">
+        <div 
+          id="registered-diploma"
+          v-if="buttonRegisterDiploma"  
+        >
+          <h2>Templates de diplomas cadastrados</h2>
+          <div 
+            id="button-register-diploma"
+            v-on:click="registerTemplate"  
+          >
+              <span>
+                  Cadastrar
+              </span>
+          </div>
+        </div>
+        <keep-alive>
+          <component :is="currentComponent">
 
-        </component>
-      </keep-alive>
+          </component>
+        </keep-alive>
+      </div>
     </div>
   </main>
 </template>
@@ -67,6 +83,7 @@
       DiplomasMainItemInicio: defineAsyncComponent(() => import('./components/DiplomasMainItemInicio.vue')),
       DiplomasMainItemUsuario: defineAsyncComponent(() => import('./components/DiplomasMainItemUsuario.vue')),
       DiplomasMainItemEscolas: defineAsyncComponent(() => import('./components/DiplomasMainItemEscolas.vue')),
+      DiplomasRegisterDiploma: defineAsyncComponent(() => import('./components/DiplomasRegisterDiploma.vue')),
     },
     data() {
       return {
@@ -75,6 +92,7 @@
         escola: false,
         usuario: false,
         diplomas: true,
+        buttonRegisterDiploma: true,
       }
     },
     methods: {
@@ -88,6 +106,7 @@
             this.escola = false;
             this.usuario = false;
             this.diplomas = false;
+            this.buttonRegisterDiploma = false;
 
             break;
           case "escola":
@@ -96,6 +115,7 @@
             this.escola = true;
             this.usuario = false;
             this.diplomas = false;
+            this.buttonRegisterDiploma = false;
 
             break;
           case "usuario":
@@ -104,6 +124,7 @@
             this.escola = false;
             this.usuario = true;
             this.diplomas = false;
+            this.buttonRegisterDiploma = false;
           
             break;
           case "diplomas":
@@ -113,9 +134,18 @@
               this.escola = false;
               this.usuario = false;
               this.diplomas = true;
+              this.buttonRegisterDiploma = true;
 
             break;
         } 
+      },
+      registerTemplate() {
+        this.currentComponent = "DiplomasRegisterDiploma";
+        this.inicio = false;
+        this.escola = false;
+        this.usuario = false;
+        this.diplomas = false;
+        this.buttonRegisterDiploma = true;
       }
     }
   }
@@ -161,4 +191,32 @@
     margin: 20px 0;
   }
 
+  div#area-current-component {
+    width: 100%;
+
+    position: relative;
+  }
+  
+  div#button-register-diploma {
+    width: 100px;
+    height: 40px;
+
+    background-color: var(--text-main-black);
+
+    position: absolute;
+    right: 15px;
+    top: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+  }
+
+  div#button-register-diploma > span {
+    color: var(--white);
+  }
 </style>

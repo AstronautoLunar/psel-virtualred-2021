@@ -1,6 +1,5 @@
 <template>
     <div id="DiplomasMainItemDiploma">
-        <h2>Templates de diplomas cadastrados</h2>
         <div id="area-filter-options">
             <div
                 id="filter-diplomas-registered"
@@ -149,9 +148,9 @@
 
 <style scoped>
     div#DiplomasMainItemDiploma {
-        padding-left: 20px;
-        
         box-sizing: border-box;
+
+        position: relative;
     }
 
     div#DiplomasMainItemDiploma,
@@ -170,7 +169,8 @@
     div#area-filter-text,
     div#area-filter-options,
     div.buttons,
-    div#area-diplomas-registered {
+    div#area-diplomas-registered,
+    div#button-register-diploma {
         display: flex;
         align-items: center;
     }
