@@ -45,14 +45,30 @@
           id="registered-diploma"
           v-if="buttonRegisterDiploma"  
         >
-          <h2>Templates de diplomas cadastrados</h2>
-          <div 
-            id="button-register-diploma"
+          <h2
+            v-if="register"
+          >Templates de diplomas cadastrados</h2>
+          <h2
+            v-if="saveDiploma"
+          >
+            Cadastrar novo template
+          </h2>
+          <div
+            class="button-diploma"
+            v-if="register" 
             v-on:click="registerTemplate"  
           >
               <span>
                   Cadastrar
               </span>
+          </div>
+          <div
+            class="button-diploma"
+            v-if="saveDiploma"
+          >
+            <span>
+              Salvar
+            </span>
           </div>
         </div>
         <keep-alive>
@@ -93,6 +109,8 @@
         usuario: false,
         diplomas: true,
         buttonRegisterDiploma: true,
+        register: true,
+        saveDiploma: false,
       }
     },
     methods: {
@@ -107,6 +125,8 @@
             this.usuario = false;
             this.diplomas = false;
             this.buttonRegisterDiploma = false;
+            this.register = true;
+            this.saveDiploma = false;
 
             break;
           case "escola":
@@ -116,6 +136,8 @@
             this.usuario = false;
             this.diplomas = false;
             this.buttonRegisterDiploma = false;
+            this.register = true;
+            this.saveDiploma = false;
 
             break;
           case "usuario":
@@ -125,6 +147,8 @@
             this.usuario = true;
             this.diplomas = false;
             this.buttonRegisterDiploma = false;
+            this.register = true;
+            this.saveDiploma = false;
           
             break;
           case "diplomas":
@@ -135,6 +159,8 @@
               this.usuario = false;
               this.diplomas = true;
               this.buttonRegisterDiploma = true;
+              this.register = true;
+              this.saveDiploma = false;
 
             break;
         } 
@@ -146,6 +172,8 @@
         this.usuario = false;
         this.diplomas = false;
         this.buttonRegisterDiploma = true;
+        this.register = false;
+        this.saveDiploma = true;
       }
     }
   }
@@ -169,6 +197,7 @@
     --color-contrast-gray: #F9F9F9;
     --color-text-disabled: #989898;
     --white: #FFFFFF;
+    --green: #68A35D;
   }
 
   div#area-sidemenu-and-main {
@@ -197,7 +226,7 @@
     position: relative;
   }
   
-  div#button-register-diploma {
+  div.button-diploma {
     width: 100px;
     height: 40px;
 
@@ -216,7 +245,7 @@
     cursor: pointer;
   }
 
-  div#button-register-diploma > span {
+  div.button-diploma > span {
     color: var(--white);
   }
 </style>
