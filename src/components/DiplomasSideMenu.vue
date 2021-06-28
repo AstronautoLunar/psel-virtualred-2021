@@ -28,6 +28,6 @@
 
         border-right: 2px solid rgba(100, 100, 100, 0.2);
 
-        height: 919px;
+        height: 700px;
     }
 </style>

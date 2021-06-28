@@ -1,7 +1,7 @@
 <template>
     <div id="DiplomasMainItemDiploma">
         <h2>Templates de diplomas cadastrados</h2>
-        <div id="area-diplomas-registered">
+        <div id="area-filter-options">
             <div
                 id="filter-diplomas-registered"
             >
@@ -30,7 +30,6 @@
                     </span>
                 </div>
             </div>
-
             <div id="filter-buttons">
                 <div 
                     class="buttons"
@@ -55,14 +54,31 @@
                 </div>
             </div>
         </div>
+        <div id="area-diplomas-registered">
+            <div id="message-diplomas-registered">
+                <span>
+                    Diplomas
+                </span>
+            </div>
+            <DiplomasItemTemplate
+                title-name="Título do diploma"
+                text-school="Escola associada"
+                text-course="Curso associado"
+                :number-users="12"
+                color-one="blue"
+                color-two="red"
+            />
+        </div>
     </div>
 </template>
 
 <script>
+    import DiplomasItemTemplate from './DiplomasItemTemplate.vue';
+
     export default {
         name: "DiplomasMainItemDiploma",
         components: {
-
+            DiplomasItemTemplate,
         }
     }
 </script>
@@ -75,8 +91,9 @@
     }
 
     div#DiplomasMainItemDiploma,
-    div#area-diplomas-registered,
-    div#filter-diplomas-registered {
+    div#area-filter-options,
+    div#filter-diplomas-registered,
+    div#area-diplomas-registered {
         width: 100%;
     }
 
@@ -87,8 +104,9 @@
     div#bar-filter, 
     div#filter-diplomas-registered,
     div#area-filter-text,
-    div#area-diplomas-registered,
-    div.buttons {
+    div#area-filter-options,
+    div.buttons,
+    div#area-diplomas-registered {
         display: flex;
         align-items: center;
     }
@@ -140,5 +158,44 @@
     div.buttons:last-of-type {
         border-top-right-radius: 10px;
         border-bottom-right-radius: 10px;
+    }
+
+    div#area-diplomas-registered {
+        flex-direction: column;
+        justify-content: flex-start;
+
+        border-top: 2px dashed var(--color-lines-gray);
+
+        position: relative;
+
+        margin-top: 30px;
+
+        height: 500px;
+
+        padding-top: 25px;
+        box-sizing: border-box;
+    }
+
+    div#message-diplomas-registered {
+        width: 64px;
+        height: 20px;
+
+        background-color: var(--text-main-black);
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        position: absolute;
+        top: -2.2%;
+        left: 15px;
+
+        border-radius: 20px;
+    }
+
+    div#message-diplomas-registered > span {
+        color: var(--white);
+
+        font-size: 10px;
     }
 </style>
