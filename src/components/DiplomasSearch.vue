@@ -23,7 +23,7 @@
         props: {
             valueName: {
                 type: String,
-                required: true,
+                required: false,
             },
         },
     }
