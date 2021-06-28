@@ -33,6 +33,7 @@
             <div id="filter-buttons">
                 <div 
                     class="buttons"
+                    v-on:click="byData"
                 >
                     <span>
                         Data
@@ -40,6 +41,7 @@
                 </div>
                 <div 
                     class="buttons"
+                    v-on:click="byName"
                 >
                     <span>
                         Nome
@@ -61,12 +63,14 @@
                 </span>
             </div>
             <DiplomasItemTemplate
-                title-name="Título do diploma"
-                text-school="Escola associada"
-                text-course="Curso associado"
-                :number-users="12"
-                color-one="blue"
-                color-two="red"
+                v-for="diploma in diplomas"
+                :key="diploma.id"
+                :title-name="diploma.titleName"
+                :text-school="diploma.textSchool"
+                :text-course="diploma.textCourse"
+                :number-users="diploma.numberUsers"
+                :color-one="diploma.colorOne"
+                :color-two="diploma.colorTwo"
             />
         </div>
     </div>
@@ -79,6 +83,66 @@
         name: "DiplomasMainItemDiploma",
         components: {
             DiplomasItemTemplate,
+        },
+        data() {
+            return {
+                diplomas: [],
+            }
+        },
+        methods: {
+            byName() {
+                let diplomasNew = this.diplomas.sort(function (a, b) {
+                    if(a.titleName < b.titleName) {
+                        return -1;
+                    } else if(a.titleName > b.titleName) {
+                        return 1;
+                    }
+                });
+                console.log(diplomasNew);
+                this.diplomas = diplomasNew;
+            },
+            byData() {
+                let diplomasNew = this.diplomas.sort(function (a, b) {
+                    if(a.id < b.id) {
+                        return -1;
+                    } else if(a.id > b.id) {
+                        return 1;
+                    }
+                });
+                console.log(diplomasNew);
+                this.diplomas = diplomasNew;
+            },
+        },
+        created() {
+            this.diplomas = [
+                {
+                    id: 1,
+                    titleName: "B Título do diploma",
+                    textSchool: "Escola associada",
+                    textCourse: "Curso associado",
+                    numberUsers: 12,
+                    colorOne: "blue",
+                    colorTwo: "red",
+                },
+                {
+                    id: 2,
+                    titleName: "A Título do diploma",
+                    textSchool: "Escola associada",
+                    textCourse: "Curso associado",
+                    numberUsers: 12,
+                    colorOne: "yellow",
+                    colorTwo: "green",
+                },
+                {
+                    id: 3,
+                    titleName: "C Título do diploma",
+                    textSchool: "Escola associada",
+                    textCourse: "Curso associado",
+                    numberUsers: 12,
+                    colorOne: "purple",
+                    colorTwo: "blue",
+                },
+            ]
         }
     }
 </script>
@@ -144,6 +208,10 @@
         justify-content: center;
 
         margin: 0 1px;
+
+        transition: all 0.2s;
+
+        cursor: pointer;
     }
 
     div.buttons > span {
@@ -158,6 +226,10 @@
     div.buttons:last-of-type {
         border-top-right-radius: 10px;
         border-bottom-right-radius: 10px;
+    }
+
+    div.buttons:hover {
+        background-color: var(--text-main-black);
     }
 
     div#area-diplomas-registered {

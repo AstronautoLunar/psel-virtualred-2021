@@ -88,6 +88,8 @@
         border-radius: 10px;
 
         box-shadow: 3px 2px 5px 1px rgb(50, 50, 50, 0.5);
+
+        margin: 10px 0;
     }
 
     span.title-item {
