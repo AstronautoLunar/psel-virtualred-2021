@@ -2,7 +2,9 @@
     <div id="DiplomasMainItemDiploma">
         <h2>Templates de diplomas cadastrados</h2>
         <div id="area-diplomas-registered">
-            <div id="filter-diplomas-registered">
+            <div
+                id="filter-diplomas-registered"
+            >
                 <div id="bar-filter">
                     <div
                         id="area-filter-text"
@@ -28,6 +30,30 @@
                     </span>
                 </div>
             </div>
+
+            <div id="filter-buttons">
+                <div 
+                    class="buttons"
+                >
+                    <span>
+                        Data
+                    </span>
+                </div>
+                <div 
+                    class="buttons"
+                >
+                    <span>
+                        Nome
+                    </span>
+                </div>
+                <div 
+                    class="buttons"
+                >
+                    <span>
+                        Atualização
+                    </span>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -37,7 +63,7 @@
         name: "DiplomasMainItemDiploma",
         components: {
 
-        },
+        }
     }
 </script>
 
@@ -60,7 +86,9 @@
 
     div#bar-filter, 
     div#filter-diplomas-registered,
-    div#area-filter-text {
+    div#area-filter-text,
+    div#area-diplomas-registered,
+    div.buttons {
         display: flex;
         align-items: center;
     }
@@ -82,4 +110,35 @@
         color: var(--color-text-disabled);
     }
 
+    div#filter-buttons {
+        display: flex;
+        align-items: center;
+
+        margin-right: 20px;
+    }
+
+    div.buttons {
+        width: 100px;
+        height: 40px;
+
+        background-color: var(--main-header);
+
+        justify-content: center;
+
+        margin: 0 1px;
+    }
+
+    div.buttons > span {
+        color: white;
+    }
+
+    div.buttons:first-of-type {
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+    }
+
+    div.buttons:last-of-type {
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
 </style>
