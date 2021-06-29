@@ -1,45 +1,75 @@
 <template>
     <div id="DiplomasRegisterDiploma">
-        <div id="option-register">
-            <div id="button-uploud-image">
-                <span id="text-uploud-image">
-                    Subir imagem
-                </span>
-                <img
-                    src="../assets/photoIcon.svg"
-                    alt="icon uploud image"
-                />
-            </div>
-            <div class="option">
-                <span>
-                    formas:
-                </span>
-                <div class="button-option">
+        <div id="area-option-register">
+            <div id="option-register">
+                <div id="button-uploud-image">
+                    <span id="text-uploud-image">
+                        Subir imagem
+                    </span>
                     <img
-                        src="../assets/starIcon.svg"
-                        alt="icon star"
+                        src="../assets/photoIcon.svg"
+                        alt="icon uploud image"
                     />
+                </div>
+                <div class="option">
+                    <span>
+                        formas:
+                    </span>
+                    <DiplomasButtonOption
+                        imgIconSrc="starIcon.svg"
+                        altIconText="Star icon"
+                    />
+                </div>
+                <div class="option">
+                    <span style="margin-right: 20px;">
+                        Campos:
+                    </span>
+                    <DiplomasButtonOption
+                        imgIconSrc="TIcon.svg"
+                        altIconText="T icon"
+                    />
+                    <DiplomasButtonOption
+                        imgIconSrc="photoIconOption.svg"
+                        altIconText="photo icon"
+                    />
+                </div>
+                <div class="option">
+                    <span style="margin-right: 10px;">
+                        Editando:
+                    </span>
+                    <div id="buttons-option-document">
+                        <div class="button-document">
+                            <span>Frente</span>
+                        </div>
+                        <div class="button-document">
+                            <span>Verso</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        <DiplomasAreaDiploma/>
     </div>
 </template>
 
 <script>
+    import DiplomasButtonOption from './DiplomasButtonOption.vue';
+    import DiplomasAreaDiploma from './DiplomasAreaDiploma.vue';
+
     export default {
         name: "DiplomasRegisterDiploma",
         components: {
-
+            DiplomasButtonOption,
+            DiplomasAreaDiploma,
         },
     }
+
 </script>
 
 <style scoped>
-    div#DiplomasRegisterDiploma {
-        box-sizing: border-box;
-
-        padding: 10px;
-    }
+    /* div#area-option-register {
+        
+    } */
 
     div#option-register {
         width: 100%;
@@ -61,8 +91,7 @@
     }
 
     div#button-uploud-image, 
-    div.option,
-    div.option > div.button-option {
+    div.option {
         display: flex;
         align-items: center;
     }
@@ -82,14 +111,46 @@
         margin: 0 35px;
     }
 
-    div.option > div.button-option {
-        width: 40px;
+    div#buttons-option-document {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    div.button-document {
+        width: 100px;
         height: 40px;
 
-        background-color: var(--green);
+        background-color: var(--main-header);
 
-        border-radius: 100%;
-
+        display: flex;
         justify-content: center;
+        align-items: center;
+
+        margin-left: 2.5px;
+
+        transition: all 0.2s;
+
+        cursor: pointer;
+    }
+
+    div.button-document:first-of-type {
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+    }
+
+    div.button-document:last-of-type {
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    div.button-document:hover {
+        background-color: var(--text-main-black);
+    }
+
+    div.button-document > span {
+        color: var(--white);
+
+        font-size: 15px;
     }
 </style>

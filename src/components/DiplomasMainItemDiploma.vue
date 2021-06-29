@@ -1,13 +1,9 @@
 <template>
     <div id="DiplomasMainItemDiploma">
         <div id="area-filter-options">
-            <div
-                id="filter-diplomas-registered"
-            >
+            <div id="filter-diplomas-registered">
                 <div id="bar-filter">
-                    <div
-                        id="area-filter-text"
-                    >
+                    <div id="area-filter-text">
                         <img
                             id="icon-filter"
                             src="../assets/filterIcon.svg"
@@ -55,7 +51,7 @@
                 </div>
             </div>
         </div>
-        <div id="area-diplomas-registered">
+        <DiplomasAreaDiploma>
             <div id="message-diplomas-registered">
                 <span>
                     Diplomas
@@ -71,17 +67,19 @@
                 :color-one="diploma.colorOne"
                 :color-two="diploma.colorTwo"
             />
-        </div>
+        </DiplomasAreaDiploma>
     </div>
 </template>
 
 <script>
     import DiplomasItemTemplate from './DiplomasItemTemplate.vue';
+    import DiplomasAreaDiploma from './DiplomasAreaDiploma.vue';
 
     export default {
         name: "DiplomasMainItemDiploma",
         components: {
             DiplomasItemTemplate,
+            DiplomasAreaDiploma,
         },
         data() {
             return {
@@ -156,7 +154,7 @@
     div#DiplomasMainItemDiploma,
     div#area-filter-options,
     div#filter-diplomas-registered,
-    div#area-diplomas-registered {
+    div.area-diploma {
         width: 100%;
     }
 
@@ -169,7 +167,7 @@
     div#area-filter-text,
     div#area-filter-options,
     div.buttons,
-    div#area-diplomas-registered,
+    div.area-diploma,
     div#button-register-diploma {
         display: flex;
         align-items: center;
@@ -232,7 +230,7 @@
         background-color: var(--text-main-black);
     }
 
-    div#area-diplomas-registered {
+    div.area-diploma {
         flex-direction: column;
         justify-content: flex-start;
 
