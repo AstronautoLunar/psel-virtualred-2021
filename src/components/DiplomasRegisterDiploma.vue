@@ -3,9 +3,18 @@
         <div id="area-option-register">
             <div id="option-register">
                 <div id="button-uploud-image">
-                    <span id="text-uploud-image">
+                    <!-- <span 
+                        id="text-uploud-image"
+
+                    >
                         Subir imagem
-                    </span>
+                    </span> -->
+                    <input
+                        type="file"
+                        @change="pegarArquivo"
+                        ref="file"
+                    />
+
                     <img
                         src="../assets/photoIcon.svg"
                         alt="icon uploud image"
@@ -48,7 +57,11 @@
                 </div>
             </div>
         </div>
-        <DiplomasAreaDiploma/>
+        <DiplomasAreaDiploma>
+            <canvas id="tela" ref="tela">
+
+            </canvas>
+        </DiplomasAreaDiploma>
     </div>
 </template>
 
@@ -62,6 +75,39 @@
             DiplomasButtonOption,
             DiplomasAreaDiploma,
         },
+        data() {
+            return {
+                // data: []
+            }
+        },
+        methods: {
+            pegarArquivo(input) {
+                console.log(input.target.files)
+                // if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                let image = new Image();
+                console.log(this.$refs.tela);
+                reader.onload = function (e) {
+                    image.src = e.target.result;
+                    console.log(e.target.result);
+                };
+
+                // console.log(image.width);
+                // console.log(image.height);
+                this.$refs.tela.width = image.width;
+                this.$refs.tela.height = image.height;
+                let context = this.$refs.tela.getContext('2d');
+
+                context.drawImage(image, 0, 0, this.$refs.tela.width, this.$refs.tela.height);
+                reader.readAsDataURL(input.target.files[0]);
+                // }
+               
+            
+            }
+
+
+        }
     }
 
 </script>
