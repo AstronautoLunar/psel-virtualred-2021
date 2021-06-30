@@ -70,31 +70,35 @@
                 </canvas>
                 <div id="tools-manipulator-image">
                     <div id="coordenates-image">
-                        <div class="row-coordenates">
-                            <!-- <div class="coordenate">
+                        <div class="column-coordenates">
+                            <div class="coordenate">
                                 <span class="type-value">
                                     X
                                 </span>
                                 <span class="value">
-                                    0
+                                    {{
+                                        currentScreen.x
+                                    }}
                                 </span>
                             </div>
-                            <div class="coordenate">
-                                <span class="type-value">
-                                    Y
-                                </span>
-                                <span class="value">
-                                    0
-                                </span>
-                            </div> -->
-                        </div>
-                        <div class="row-coordenates">
                             <div class="coordenate">
                                 <span class="type-value">
                                     W
                                 </span>
                                 <span class="value">
                                     {{ currentScreen.width }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="column-coordenates">
+                            <div class="coordenate">
+                                <span class="type-value">
+                                    Y
+                                </span>
+                                <span class="value">
+                                    {{
+                                        currentScreen.y
+                                    }}
                                 </span>
                             </div>
                             <div class="coordenate">
@@ -132,6 +136,8 @@
                 currentScreen: {
                     width: 0,
                     height: 0,
+                    x: 0,
+                    y: 0,
                 }
             }
         },
@@ -154,6 +160,16 @@
                     context.drawImage(img, 0, 0, tela.width, tela.height);
                 }
             }
+        },
+        mounted() {
+            let tela = this.$refs.tela;
+
+            let currentScreenValue = this.currentScreen
+
+            tela.addEventListener('mousemove', event => {
+                currentScreenValue.x = event.layerX
+                currentScreenValue.y = event.layerY
+            })
         }
     }
 
@@ -186,7 +202,8 @@
     div#manipulator-image,
     div#coordenates-image,
     div.row-coordenates,
-    div#tools-manipulator-image {
+    div#tools-manipulator-image,
+    div.coordenate {
         display: flex;
     }
 
@@ -266,8 +283,7 @@
         box-sizing: border-box;
     }
 
-    div#tools-manipulator-image,
-    div#coordenates-image {
+    div#tools-manipulator-image {
         flex-direction: column;
     }
 
@@ -290,19 +306,19 @@
         padding: 10px;
     }
 
-    div.row-coordenates {
-        width: 100%;
-        height: 50%;
+    div.column-coordenates {
+        width: 50%;
+        height: 100%;
 
         margin-top: 10px;
     }
 
-    div.coordenate {
+    /* div.coordenate {
         margin-right: 50px;
-    }
+    } */
 
     div.coordenate:last-of-type {
-        margin-right: 0px;
+        margin-top: 20px;
     }
 
     span.type-value {
