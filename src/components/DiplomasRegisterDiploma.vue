@@ -62,10 +62,53 @@
         </div>
         <DiplomasAreaDiploma
             flexDirection="row"
+            alignItems="flex-start"
         >
-            <canvas id="tela" ref="tela" width="800" height="600">
+            <div id="manipulator-image">
+                <canvas id="tela" ref="tela" width="800" height="500">
 
-            </canvas>
+                </canvas>
+                <div id="tools-manipulator-image">
+                    <div id="coordenates-image">
+                        <div class="row-coordenates">
+                            <!-- <div class="coordenate">
+                                <span class="type-value">
+                                    X
+                                </span>
+                                <span class="value">
+                                    0
+                                </span>
+                            </div>
+                            <div class="coordenate">
+                                <span class="type-value">
+                                    Y
+                                </span>
+                                <span class="value">
+                                    0
+                                </span>
+                            </div> -->
+                        </div>
+                        <div class="row-coordenates">
+                            <div class="coordenate">
+                                <span class="type-value">
+                                    W
+                                </span>
+                                <span class="value">
+                                    {{ currentScreen.width }}
+                                </span>
+                            </div>
+                            <div class="coordenate">
+                                <span class="type-value">
+                                    H
+                                </span>
+                                <span class="value">
+                                    {{ currentScreen.height }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </DiplomasAreaDiploma>
     </div>
 </template>
@@ -82,9 +125,13 @@
         },
         data() {
             return {
-                tela: {
+                screen: {
                     width: 300,
                     height: 300,
+                },
+                currentScreen: {
+                    width: 0,
+                    height: 0,
                 }
             }
         },
@@ -98,9 +145,12 @@
                 let img = new Image();
                 img.src = url;
                 let tela = this.$refs.tela;
+                let currentScreenOnLoad = this.currentScreen
                 img.onload = function() {
                     tela.width = img.width;
                     tela.height = img.height
+                    currentScreenOnLoad.width = img.width;
+                    currentScreenOnLoad.height = img.height;
                     context.drawImage(img, 0, 0, tela.width, tela.height);
                 }
             }
@@ -110,9 +160,6 @@
 </script>
 
 <style scoped>
-    /* div#area-option-register {
-        
-    } */
 
     div#option-register {
         width: 100%;
@@ -134,8 +181,20 @@
     }
 
     div#button-uploud-image, 
-    div.option {
+    div.option, 
+    div#buttons-option-document,
+    div#manipulator-image,
+    div#coordenates-image,
+    div.row-coordenates,
+    div#tools-manipulator-image {
         display: flex;
+    }
+
+    div#button-uploud-image, 
+    div.option,
+    div#buttons-option-document,
+    div.row-coordenates,
+    div#tools-manipulator-image {
         align-items: center;
     }
 
@@ -157,9 +216,7 @@
     }
 
     div#buttons-option-document {
-        display: flex;
         justify-content: center;
-        align-items: center;
     }
 
     div.button-document {
@@ -197,5 +254,60 @@
         color: var(--white);
 
         font-size: 15px;
+    }
+
+    div#manipulator-image {
+        width: 100%;
+
+        display: flex;
+
+        padding-top: 20px;
+        
+        box-sizing: border-box;
+    }
+
+    div#tools-manipulator-image,
+    div#coordenates-image {
+        flex-direction: column;
+    }
+
+    div#tools-manipulator-image {
+        width: 350px;
+        height: 100vh;
+
+    }
+
+    div#coordenates-image {
+        background-color: var(--white);
+
+        box-shadow: 1px 2px 5px 0.1px rgba(20, 20, 20, 0.5);
+
+        width: 182px;
+        height: 80px;
+        
+        margin-top: 25px;
+        
+        padding: 10px;
+    }
+
+    div.row-coordenates {
+        width: 100%;
+        height: 50%;
+
+        margin-top: 10px;
+    }
+
+    div.coordenate {
+        margin-right: 50px;
+    }
+
+    div.coordenate:last-of-type {
+        margin-right: 0px;
+    }
+
+    span.type-value {
+        margin: 0 10px;
+
+        color: var(--color-text-disabled)
     }
 </style>

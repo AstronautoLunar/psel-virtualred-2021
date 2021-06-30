@@ -22,7 +22,7 @@
         },
         data() {
             return {
-                style: `flex-direction: ${this.flexDirection};`
+                style: `flex-direction: ${this.flexDirection}; align-items: ${this.alignItems};`
             }
         },
         props: {
@@ -30,6 +30,10 @@
                 type: String,
                 required: false,
             },
+            alignItems: {
+                type: String,
+                required: false,
+            }
         }
     }
 </script>
