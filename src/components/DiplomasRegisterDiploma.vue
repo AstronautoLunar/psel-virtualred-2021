@@ -217,6 +217,25 @@
                         );
                     }
                 }
+                this.images[0].addEventListener('mousedown', event => {
+                    this.images[0].onload = function() {
+                        // tela.width = imgCreated.width;
+                        // tela.height = img.height
+                        // currentScreenOnLoad.width = img.width;
+                        // currentScreenOnLoad.height = img.height;
+                        context.drawImage(
+                            imgCreated, 
+                            event.layerX, 
+                            event.layerY, 
+                            tela.width, 
+                            tela.height, 
+                            50, 
+                            50, 
+                            tela.width/2, 
+                            tela.height/2
+                        );
+                    }
+                })
                 
             }
         },
