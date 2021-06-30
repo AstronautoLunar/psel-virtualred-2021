@@ -2,17 +2,20 @@
     <div id="DiplomasRegisterDiploma">
         <div id="area-option-register">
             <div id="option-register">
-                <div id="button-uploud-image">
-                    <!-- <span 
+                <div id="button-uploud-image"
+                    v-on:click="goInput"
+                >
+                    <span 
                         id="text-uploud-image"
 
                     >
                         Subir imagem
-                    </span> -->
+                    </span>
                     <input
                         type="file"
-                        @change="pegarArquivo"
+                        @change="getFile"
                         ref="file"
+                        style="display: none;"
                     />
 
                     <img
@@ -58,7 +61,7 @@
             </div>
         </div>
         <DiplomasAreaDiploma>
-            <canvas id="tela" ref="tela">
+            <canvas id="tela" ref="tela" width="800" height="600">
 
             </canvas>
         </DiplomasAreaDiploma>
@@ -77,36 +80,28 @@
         },
         data() {
             return {
-                // data: []
+                tela: {
+                    width: 300,
+                    height: 300,
+                }
             }
         },
         methods: {
-            pegarArquivo(input) {
-                console.log(input.target.files)
-                // if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                let image = new Image();
-                console.log(this.$refs.tela);
-                reader.onload = function (e) {
-                    image.src = e.target.result;
-                    console.log(e.target.result);
-                };
-
-                // console.log(image.width);
-                // console.log(image.height);
-                this.$refs.tela.width = image.width;
-                this.$refs.tela.height = image.height;
+            goInput() {
+                this.$refs.file.click();
+            },
+            getFile(file) {
+                let url = URL.createObjectURL(file.target.files[0]);
                 let context = this.$refs.tela.getContext('2d');
-
-                context.drawImage(image, 0, 0, this.$refs.tela.width, this.$refs.tela.height);
-                reader.readAsDataURL(input.target.files[0]);
-                // }
-               
-            
+                let img = new Image();
+                img.src = url;
+                let tela = this.$refs.tela;
+                img.onload = function() {
+                    tela.width = img.width;
+                    tela.height = img.height
+                    context.drawImage(img, 0, 0, tela.width, tela.height);
+                }
             }
-
-
         }
     }
 
@@ -145,6 +140,8 @@
 
     span#text-uploud-image {
         color: var(--white);
+
+        cursor: pointer;
     }
 
     div.option {
