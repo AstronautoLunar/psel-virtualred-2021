@@ -52,11 +52,6 @@
             </div>
         </div>
         <DiplomasAreaDiploma>
-            <div id="message-diplomas-registered">
-                <span>
-                    Diplomas
-                </span>
-            </div>
             <DiplomasItemTemplate
                 v-for="diploma in diplomas"
                 :key="diploma.id"

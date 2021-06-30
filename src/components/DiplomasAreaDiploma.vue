@@ -1,5 +1,8 @@
 <template>
-    <div class="DiplomasAreaDiploma">
+    <div 
+        class="DiplomasAreaDiploma"
+        :style="style"    
+    >
         <div id="message-diplomas-registered">
             <span>
                 Diplomas
@@ -17,6 +20,17 @@
         components: {
 
         },
+        data() {
+            return {
+                style: `flex-direction: ${this.flexDirection};`
+            }
+        },
+        props: {
+            flexDirection: {
+                type: String,
+                required: false,
+            },
+        }
     }
 </script>
 
@@ -35,7 +49,7 @@
 
         margin-top: 30px;
 
-        height: 500px;
+        height: 1000px;
 
         padding-top: 25px;
         box-sizing: border-box;
@@ -52,7 +66,7 @@
         align-items: center;
 
         position: absolute;
-        top: -2.2%;
+        top: -1.2%;
         left: 15px;
 
         border-radius: 20px;

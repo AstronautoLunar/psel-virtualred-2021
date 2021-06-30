@@ -60,7 +60,9 @@
                 </div>
             </div>
         </div>
-        <DiplomasAreaDiploma>
+        <DiplomasAreaDiploma
+            flexDirection="row"
+        >
             <canvas id="tela" ref="tela" width="800" height="600">
 
             </canvas>
