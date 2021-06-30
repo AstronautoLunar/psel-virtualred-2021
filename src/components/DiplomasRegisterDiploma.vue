@@ -27,23 +27,42 @@
                     <span>
                         formas:
                     </span>
-                    <DiplomasButtonOption
-                        imgIconSrc="starIcon.svg"
-                        altIconText="Star icon"
-                    />
+                    <div 
+                        class="button-option"
+                    >
+                        <img
+                            src="../assets/starIcon.svg"
+                            alt="Star icon"
+                        />
+                    </div>
                 </div>
                 <div class="option">
                     <span style="margin-right: 20px;">
                         Campos:
                     </span>
-                    <DiplomasButtonOption
-                        imgIconSrc="TIcon.svg"
-                        altIconText="T icon"
-                    />
-                    <DiplomasButtonOption
-                        imgIconSrc="photoIconOption.svg"
-                        altIconText="photo icon"
-                    />
+                    <div 
+                        class="button-option"
+                    >
+                        <img
+                            src="../assets/TIcon.svg"
+                            alt="T icon"
+                        />
+                    </div>
+                    <div 
+                        class="button-option"
+                        v-on:click="goInputImageIncrement"
+                    >
+                        <input
+                            type="file"
+                            @change="incrementImage"
+                            ref="fileIncrement"
+                            style="display: none;"
+                        />
+                        <img
+                            src="../assets/photoIconOption.svg"
+                            alt="photo icon"
+                        />
+                    </div>
                 </div>
                 <div class="option">
                     <span style="margin-right: 10px;">
@@ -118,13 +137,11 @@
 </template>
 
 <script>
-    import DiplomasButtonOption from './DiplomasButtonOption.vue';
     import DiplomasAreaDiploma from './DiplomasAreaDiploma.vue';
 
     export default {
         name: "DiplomasRegisterDiploma",
         components: {
-            DiplomasButtonOption,
             DiplomasAreaDiploma,
         },
         data() {
@@ -138,7 +155,10 @@
                     height: 0,
                     x: 0,
                     y: 0,
-                }
+                },
+                images: [
+
+                ]
             }
         },
         methods: {
@@ -147,18 +167,57 @@
             },
             getFile(file) {
                 let url = URL.createObjectURL(file.target.files[0]);
-                let context = this.$refs.tela.getContext('2d');
+                let tela = this.$refs.tela;
+                let context = tela.getContext('2d');
                 let img = new Image();
                 img.src = url;
-                let tela = this.$refs.tela;
                 let currentScreenOnLoad = this.currentScreen
                 img.onload = function() {
                     tela.width = img.width;
                     tela.height = img.height
                     currentScreenOnLoad.width = img.width;
                     currentScreenOnLoad.height = img.height;
-                    context.drawImage(img, 0, 0, tela.width, tela.height);
+                    context.drawImage(
+                            img, 
+                            0, 
+                            0, 
+                            tela.width, 
+                            tela.height
+                    );
                 }
+            },
+            goInputImageIncrement() {
+                this.$refs.fileIncrement.click();
+            },
+            incrementImage(file) {
+                let url = URL.createObjectURL(file.target.files[0]);
+                let tela = this.$refs.tela;
+                let context = tela.getContext('2d');
+                let imgCreated = new Image();
+                imgCreated.src = url;
+                this.images = this.images.concat([ imgCreated ]);
+                // console.log(this.images[0]);
+                // let currentScreenOnLoad = this.currentScreen
+                for(let i in this.images) {
+                    this.images[i].onload = function() {
+                        // tela.width = imgCreated.width;
+                        // tela.height = img.height
+                        // currentScreenOnLoad.width = img.width;
+                        // currentScreenOnLoad.height = img.height;
+                        context.drawImage(
+                            imgCreated, 
+                            0, 
+                            0, 
+                            tela.width, 
+                            tela.height, 
+                            50, 
+                            50, 
+                            tela.width/2, 
+                            tela.height/2
+                        );
+                    }
+                }
+                
             }
         },
         mounted() {
@@ -169,7 +228,7 @@
             tela.addEventListener('mousemove', event => {
                 currentScreenValue.x = event.layerX
                 currentScreenValue.y = event.layerY
-            })
+            });
         }
     }
 
@@ -230,6 +289,27 @@
         color: var(--color-text-disabled);
 
         margin: 0 35px;
+    }
+
+    div.button-option {
+        width: 40px;
+        height: 40px;
+
+        background-color: var(--green);
+
+        border-radius: 100%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        margin-right: 20px;
+
+        cursor: pointer;
+    }
+
+    div.button-option:last-of-type {
+        margin-right: 0px;
     }
 
     div#buttons-option-document {
@@ -325,5 +405,9 @@
         margin: 0 10px;
 
         color: var(--color-text-disabled)
+    }
+
+    canvas#tela {
+        background-color: black;
     }
 </style>
