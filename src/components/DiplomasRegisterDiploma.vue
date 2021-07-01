@@ -158,6 +158,9 @@
                 },
                 images: [
 
+                ],
+                coordenatesImages: [
+
                 ]
             }
         },
@@ -167,16 +170,22 @@
             },
             getFile(file) {
                 let url = URL.createObjectURL(file.target.files[0]);
+                
                 let tela = this.$refs.tela;
                 let context = tela.getContext('2d');
+                
                 let img = new Image();
                 img.src = url;
+                
                 let currentScreenOnLoad = this.currentScreen
+                
                 img.onload = function() {
                     tela.width = img.width;
                     tela.height = img.height
+                    
                     currentScreenOnLoad.width = img.width;
                     currentScreenOnLoad.height = img.height;
+                    
                     context.drawImage(
                             img, 
                             0, 
@@ -191,15 +200,24 @@
             },
             incrementImage(file) {
                 let url = URL.createObjectURL(file.target.files[0]);
+
                 let tela = this.$refs.tela;
                 let context = tela.getContext('2d');
-                console.log(context);
+                
                 let imgCreated = new Image();
                 imgCreated.src = url;
+                
                 this.images = this.images.concat([ imgCreated ]);
                 let imagesArray = this.images
-                console.log(imagesArray);
+                this.coordenatesImages = this.coordenatesImages.concat([{
+                    x: 50,
+                    y: 50,
+                }])
+                
+                let coordenatesImageLoaded = this.coordenatesImage;
+
                 function run() {
+                    
                     for(let i = 0; i < imagesArray.length; i++) {
                         context.drawImage(
                             imagesArray[i], 
@@ -207,35 +225,16 @@
                             0, 
                             tela.width, 
                             tela.height, 
-                            50, 
-                            50, 
+                            coordenatesImageLoaded.x, 
+                            coordenatesImageLoaded.y, 
                             tela.width / 2, 
                             tela.height / 2,
                         );
                     }
+
                     window.requestAnimationFrame(run);
                 }
-                
                 run();
-                
-                // imagesArray[0].addEventListener('mousedown', event => {
-                //     this.images[0].onload = function() {
-
-
-                //         context.drawImage(
-                //             imgCreated, 
-                //             event.layerX, 
-                //             event.layerY, 
-                //             tela.width, 
-                //             tela.height, 
-                //             50, 
-                //             50, 
-                //             tela.width/2, 
-                //             tela.height/2
-                //         );
-                //     }
-                // })
-                
             }
         },
         mounted() {
@@ -247,7 +246,41 @@
                 currentScreenValue.x = event.layerX
                 currentScreenValue.y = event.layerY
             });
-        }
+
+            console.log(this.images.length >= 0);
+
+            if(this.images.length >= 0) {
+                    // let imagesArrayLoaded = this.images;
+                    // let coordenatesImagesLoaded = this.coordenatesImages;
+                    // console.log(coordenatesImagesLoaded);
+
+                    tela.addEventListener('mousedown', () => {
+                        // for(let i in imagesArrayLoaded) {
+                        //     let catX = coordenatesImagesLoaded[i].x - event.offsetX;
+                        //     console.log(`catX ${i}: ${catX}`);
+                        //     let catY = coordenatesImagesLoaded[i].y - event.offsetY
+                        //     console.log(`catY ${i}: ${catY}`);
+                        //     console.log(`hyp ${i}: ${Math.sqrt(catX * catX + catY * catY)}`);
+                        // }
+                        // console.log()
+    
+                        // this.images[0].onload = function() {
+                        //     context.drawImage(
+                        //         imgCreated, 
+                        //         event.layerX, 
+                        //         event.layerY, 
+                        //         tela.width, 
+                        //         tela.height, 
+                        //         50, 
+                        //         50, 
+                        //         tela.width/2, 
+                        //         tela.height/2
+                        //     );
+                        // }
+                    })
+                }
+            }
+
     }
 
 </script>
