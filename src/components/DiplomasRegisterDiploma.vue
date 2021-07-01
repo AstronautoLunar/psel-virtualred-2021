@@ -200,10 +200,6 @@
                 let imagesArray = this.images
                 console.log(imagesArray);
                 function run() {
-                    let telaReloaded = tela; 
-
-                    context.clearRect(0, 0, telaReloaded.width, telaReloaded.height);
-
                     for(let i = 0; i < imagesArray.length; i++) {
                         context.drawImage(
                             imagesArray[i], 
@@ -216,11 +212,8 @@
                             tela.width / 2, 
                             tela.height / 2,
                         );
-
-                        // Bug na permanencia de duas imagens por causa do loop
-
-                        window.requestAnimationFrame(run);
                     }
+                    window.requestAnimationFrame(run);
                 }
                 
                 run();
