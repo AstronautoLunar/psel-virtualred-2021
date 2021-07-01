@@ -247,6 +247,8 @@
                 currentScreenValue.y = event.layerY
             });
 
+            // https://www.youtube.com/watch?v=pKw2oykJZdM&ab_channel=GustavoSilveira salvar para ver outro dia
+
             console.log(this.images.length >= 0);
 
             if(this.images.length >= 0) {
