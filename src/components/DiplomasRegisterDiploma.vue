@@ -193,49 +193,55 @@
                 let url = URL.createObjectURL(file.target.files[0]);
                 let tela = this.$refs.tela;
                 let context = tela.getContext('2d');
+                console.log(context);
                 let imgCreated = new Image();
                 imgCreated.src = url;
                 this.images = this.images.concat([ imgCreated ]);
-                // console.log(this.images[0]);
-                // let currentScreenOnLoad = this.currentScreen
-                for(let i in this.images) {
-                    this.images[i].onload = function() {
-                        // tela.width = imgCreated.width;
-                        // tela.height = img.height
-                        // currentScreenOnLoad.width = img.width;
-                        // currentScreenOnLoad.height = img.height;
+                let imagesArray = this.images
+                console.log(imagesArray);
+                function run() {
+                    let telaReloaded = tela; 
+
+                    context.clearRect(0, 0, telaReloaded.width, telaReloaded.height);
+
+                    for(let i = 0; i < imagesArray.length; i++) {
                         context.drawImage(
-                            imgCreated, 
+                            imagesArray[i], 
                             0, 
                             0, 
                             tela.width, 
                             tela.height, 
                             50, 
                             50, 
-                            tela.width/2, 
-                            tela.height/2
+                            tela.width / 2, 
+                            tela.height / 2,
                         );
+
+                        // Bug na permanencia de duas imagens por causa do loop
+
+                        window.requestAnimationFrame(run);
                     }
                 }
-                this.images[0].addEventListener('mousedown', event => {
-                    this.images[0].onload = function() {
-                        // tela.width = imgCreated.width;
-                        // tela.height = img.height
-                        // currentScreenOnLoad.width = img.width;
-                        // currentScreenOnLoad.height = img.height;
-                        context.drawImage(
-                            imgCreated, 
-                            event.layerX, 
-                            event.layerY, 
-                            tela.width, 
-                            tela.height, 
-                            50, 
-                            50, 
-                            tela.width/2, 
-                            tela.height/2
-                        );
-                    }
-                })
+                
+                run();
+                
+                // imagesArray[0].addEventListener('mousedown', event => {
+                //     this.images[0].onload = function() {
+
+
+                //         context.drawImage(
+                //             imgCreated, 
+                //             event.layerX, 
+                //             event.layerY, 
+                //             tela.width, 
+                //             tela.height, 
+                //             50, 
+                //             50, 
+                //             tela.width/2, 
+                //             tela.height/2
+                //         );
+                //     }
+                // })
                 
             }
         },
