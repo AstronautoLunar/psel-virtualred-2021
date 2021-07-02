@@ -84,7 +84,7 @@
             alignItems="flex-start"
         >
             <div id="manipulator-image">
-                <canvas id="tela" ref="tela" width="800" height="500">
+                <canvas id="tela" ref="tela" width="700" height="500">
 
                 </canvas>
                 <div id="tools-manipulator-image">
@@ -159,9 +159,7 @@
                 images: [
 
                 ],
-                coordenatesImages: [
-
-                ]
+                updateImagesNumberTimes: 0,
             }
         },
         methods: {
@@ -207,8 +205,6 @@
                 let imgCreated = new Image();
                 imgCreated.src = url;
                 
-                // console.log(imgCreated);
-                
                 let imagesArray = this.images
                 
                 imgCreated.onload = function() {
@@ -216,31 +212,25 @@
                         imgFile: imgCreated,
                         x: Math.floor(Math.random() * tela.width),
                         y: Math.floor(Math.random() * tela.height),
-                        // width: imgCreated.width,
-                        // height: imgCreated.height,
+                        width: imgCreated.width,
+                        height: imgCreated.height,
                     }]);
-                    console.log(imagesArray);
                 }
+                this.updateImagesNumberTimes += 1;
 
-                // console.table(imagesArray);
-                // this.coordenatesImages = this.coordenatesImages.concat([{
-                //     x: 50,
-                //     y: 50,
-                // }])
-                
-                // let coordenatesImageLoaded = this.coordenatesImage;
+                console.log(this.images);
 
                 function run() {
-                    
+
                     for(let i = 0; i < imagesArray.length; i++) {
                         context.drawImage(
                             imagesArray[i].imgFile, 
                             0, 
                             0, 
-                            tela.width, 
-                            tela.height, 
-                            imagesArray[i].x, 
-                            imagesArray[i].y, 
+                            imagesArray[i].width, 
+                            imagesArray[i].height, 
+                            Math.abs(imagesArray[i].x - (tela.width / 1.3)), 
+                            Math.abs(imagesArray[i].y - (tela.height / 1.3)), 
                             imagesArray[i].width / 2, 
                             imagesArray[i].height / 2,
                         );
@@ -263,40 +253,39 @@
 
             // https://www.youtube.com/watch?v=pKw2oykJZdM&ab_channel=GustavoSilveira salvar para ver outro dia
 
-            // console.log();
+            // let imagesArrayLoaded = this.images
 
-            if(this.images.length >= 0) {
-                // let imagesArrayLoaded = this.images;
-                // let coordenatesImagesLoaded = this.coordenatesImages;
-                // console.log(coordenatesImagesLoaded);
+            // tela.addEventListener('click', () => {
+            //     console.log(imagesArrayLoaded);
+            //     console.log(imagesArrayLoaded);   
+            //     for(let i in imagesArrayLoaded) {
+            //         let catX = imagesArrayLoaded[i].x - event.offsetX;
+            //         console.log(`catX ${i}: ${catX}`);
+            //         let catY = imagesArrayLoaded[i].y - event.offsetY
+            //         console.log(`catY ${i}: ${catY}`);
+            //         console.log(`hyp ${i}: ${Math.sqrt(catX * catX + catY * catY)}`);
+            //     }
 
-                tela.addEventListener('mousedown', () => {
-                    // for(let i in imagesArrayLoaded) {
-                    //     let catX = coordenatesImagesLoaded[i].x - event.offsetX;
-                    //     console.log(`catX ${i}: ${catX}`);
-                    //     let catY = coordenatesImagesLoaded[i].y - event.offsetY
-                    //     console.log(`catY ${i}: ${catY}`);
-                    //     console.log(`hyp ${i}: ${Math.sqrt(catX * catX + catY * catY)}`);
-                    // }
-                    // console.log()
-
-                    // this.images[0].onload = function() {
-                    //     context.drawImage(
-                    //         imgCreated, 
-                    //         event.layerX, 
-                    //         event.layerY, 
-                    //         tela.width, 
-                    //         tela.height, 
-                    //         50, 
-                    //         50, 
-                    //         tela.width/2, 
-                    //         tela.height/2
-                    //     );
-                    // }
-                })
+            //     this.images[0].onload = function() {
+            //         context.drawImage(
+            //             imgCreated, 
+            //             event.layerX, 
+            //             event.layerY, 
+            //             tela.width, 
+            //             tela.height, 
+            //             50, 
+            //             50, 
+            //             tela.width/2, 
+            //             tela.height/2
+            //         );
+            //     }
+            // })
+        },
+        watch: {
+            updateImagesNumberTimes(newValue) {
+                console.log(newValue);
             }
         }
-
     }
 
 </script>
