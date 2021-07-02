@@ -209,12 +209,12 @@
                 
                 this.images = this.images.concat([ imgCreated ]);
                 let imagesArray = this.images
-                this.coordenatesImages = this.coordenatesImages.concat([{
-                    x: 50,
-                    y: 50,
-                }])
+                // this.coordenatesImages = this.coordenatesImages.concat([{
+                //     x: 50,
+                //     y: 50,
+                // }])
                 
-                let coordenatesImageLoaded = this.coordenatesImage;
+                // let coordenatesImageLoaded = this.coordenatesImage;
 
                 function run() {
                     
@@ -225,8 +225,8 @@
                             0, 
                             tela.width, 
                             tela.height, 
-                            coordenatesImageLoaded.x, 
-                            coordenatesImageLoaded.y, 
+                            50, 
+                            50, 
                             tela.width / 2, 
                             tela.height / 2,
                         );
