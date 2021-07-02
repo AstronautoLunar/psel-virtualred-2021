@@ -84,7 +84,7 @@
             alignItems="flex-start"
         >
             <div id="manipulator-image">
-                <canvas id="tela" ref="tela" width="700" height="500">
+                <canvas id="tela" ref="tela" width="700" height="700">
 
                 </canvas>
                 <div id="tools-manipulator-image">
@@ -206,7 +206,7 @@
                 imgCreated.src = url;
                 
                 let imagesArray = this.images
-                
+
                 imgCreated.onload = function() {
                     imagesArray = imagesArray.concat([ ...imagesArray, {
                         imgFile: imgCreated,
@@ -214,15 +214,19 @@
                         y: Math.floor(Math.random() * tela.height),
                         width: imgCreated.width,
                         height: imgCreated.height,
+                        hold: false,
                     }]);
+                    
+                    let idImage = Math.floor(Math.random() * 1000);
+
+                    window.localStorage.setItem(String(idImage), `${url} ${String(imagesArray[0].x)} ${String(imagesArray[0].y)} ${String(imagesArray[0].width)} ${String(imagesArray[0].height)} id:${idImage}`);
                 }
-                this.updateImagesNumberTimes += 1;
 
                 console.log(this.images);
 
                 function run() {
 
-                    for(let i = 0; i < imagesArray.length; i++) {
+                    for(let i in imagesArray) {
                         context.drawImage(
                             imagesArray[i].imgFile, 
                             0, 
@@ -253,38 +257,32 @@
 
             // https://www.youtube.com/watch?v=pKw2oykJZdM&ab_channel=GustavoSilveira salvar para ver outro dia
 
-            // let imagesArrayLoaded = this.images
+            let imagesArrayLoaded = this.images
 
-            // tela.addEventListener('click', () => {
-            //     console.log(imagesArrayLoaded);
-            //     console.log(imagesArrayLoaded);   
-            //     for(let i in imagesArrayLoaded) {
-            //         let catX = imagesArrayLoaded[i].x - event.offsetX;
-            //         console.log(`catX ${i}: ${catX}`);
-            //         let catY = imagesArrayLoaded[i].y - event.offsetY
-            //         console.log(`catY ${i}: ${catY}`);
-            //         console.log(`hyp ${i}: ${Math.sqrt(catX * catX + catY * catY)}`);
-            //     }
+            tela.addEventListener('mousedown', () => {
+                console.log(imagesArrayLoaded);   
+                // for(let i in imagesArrayLoaded) {
+                //     let catX = imagesArrayLoaded[i].x - event.offsetX;
+                //     console.log(`catX ${i}: ${catX}`);
+                //     let catY = imagesArrayLoaded[i].y - event.offsetY
+                //     console.log(`catY ${i}: ${catY}`);
+                //     console.log(`hyp ${i}: ${Math.sqrt(catX * catX + catY * catY)}`);
+                // }
 
-            //     this.images[0].onload = function() {
-            //         context.drawImage(
-            //             imgCreated, 
-            //             event.layerX, 
-            //             event.layerY, 
-            //             tela.width, 
-            //             tela.height, 
-            //             50, 
-            //             50, 
-            //             tela.width/2, 
-            //             tela.height/2
-            //         );
-            //     }
-            // })
-        },
-        watch: {
-            updateImagesNumberTimes(newValue) {
-                console.log(newValue);
-            }
+                // this.images[0].onload = function() {
+                //     context.drawImage(
+                //         imgCreated, 
+                //         event.layerX, 
+                //         event.layerY, 
+                //         tela.width, 
+                //         tela.height, 
+                //         50, 
+                //         50, 
+                //         tela.width/2, 
+                //         tela.height/2
+                //     );
+                // }
+            })
         }
     }
 
@@ -448,10 +446,6 @@
 
         margin-top: 10px;
     }
-
-    /* div.coordenate {
-        margin-right: 50px;
-    } */
 
     div.coordenate:last-of-type {
         margin-top: 20px;

@@ -187,9 +187,6 @@
     font-family: Rubik;
   }
 
-  /* main#main {
-  } */
-
   :root {
     --main-header: #B28DD6;
     --text-main-black: #000000;
@@ -205,10 +202,6 @@
     justify-content: flex-start;
     align-items: flex-start;
   }
-
-  /* div#icon-area-sideMenu {
-
-  } */
 
   div.area-sideMenu {
     display: flex;

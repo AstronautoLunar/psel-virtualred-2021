@@ -1,9 +1,9 @@
 <template>
-    <div id="DiplomasSideMenu">
+    <nav id="DiplomasSideMenu">
         <slot name="items">
 
         </slot>
-    </div>
+    </nav>
 </template>
 
 <script>
@@ -16,7 +16,7 @@
 </script>
 
 <style scoped>
-    div#DiplomasSideMenu {
+    nav#DiplomasSideMenu {
         width: 207px;
 
         display: flex;
